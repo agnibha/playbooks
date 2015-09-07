@@ -1,0 +1,20 @@
+vagrant up
+vagrant destroy
+vagrant init hansode/centos-5.6-x86_64
+vagrant ssh
+vim hosts
+ssh vagrant@127.0.0.1 -p 2222 -i ~/playbooks/.vagrant/machines/default/virtualbox/private_key
+vagrant destroy
+vagrant init hansode/centos-5.6-x86_64
+vagrant status
+vim .ansible.cfg
+ansible testserver -i hosts -m ping
+ssh vagrant@127.0.0.1 -p 2200 -i ~/playbooks/.vagrant/machines/default/virtualbox/private_key
+ansible testserver -i hosts -m ping
+ansible testserver -i hosts -m ping -vvvv
+mv .ansible.cfg ~
+ansible testserver -m ping
+ansible testserver -a "tail /var/log/dmesg"
+ansible testserver -a "tail -f /var/log/dmesg"
+ansible testserver -s -m yum -a name=epel-release
+ansible testserver -s -m yum -a name=nginx
